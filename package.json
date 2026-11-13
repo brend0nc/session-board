@@ -1,6 +1,6 @@
 {
   "name": "@bungeegum-senpai/session-board",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "One local page for your Claude Code desktop sessions: who waits for you, who works, and a chat for each. Pixel-game look.",
   "license": "MIT",
   "author": "brend0nc",

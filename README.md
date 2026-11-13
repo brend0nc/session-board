@@ -1,12 +1,15 @@
 # Session board
 
+[![npm version](https://img.shields.io/npm/v/@bungeegum-senpai/session-board)](https://www.npmjs.com/package/@bungeegum-senpai/session-board)
+[![license](https://img.shields.io/npm/l/@bungeegum-senpai/session-board)](LICENSE)
+
 A local dashboard for all of your Claude Code sessions in the Claude desktop app.
 
 This is a small tool for people who run a _lot_ of Claude Code sessions at the same time, and lose track of them. It reads the sessions on your machine and gives you one page: which sessions are waiting for you, which are working, and a chat for each one, so you can answer all of them from one place.
 
 It also looks like a small pixel game, with a view of a mountain near you. I look at this page for a large part of my day, so I wanted it to be a nice thing to look at.
 
-![The board at dawn in Tokyo, with a view of Mount Fuji and three questions that wait](docs/gallery/tokyo-dawn.png)
+![The board at dawn in Tokyo, with a view of Mount Fuji and three questions that wait](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/tokyo-dawn.png)
 
 **TL;DR**
 
@@ -24,6 +27,14 @@ You need Node 20 or later, and the Claude desktop app.
 
 ```shell
 npm install -g @bungeegum-senpai/session-board
+```
+
+The package is [@bungeegum-senpai/session-board](https://www.npmjs.com/package/@bungeegum-senpai/session-board) on npm, and the command it installs is `session-board`. (The plain name `session-board` was too close to an existing package, so npm asked for a scoped one.)
+
+If you only want a look first, this runs the board with no install, and `?demo=webdev` in the address shows it with sample sessions:
+
+```shell
+npx @bungeegum-senpai/session-board
 ```
 
 If you want to change the code, clone the repository instead:
@@ -93,10 +104,10 @@ What the board looks like for different people, places and times of day. All of 
 
 | | |
 |---|---|
-| ![Seattle in the morning](docs/gallery/seattle-morning.png) Seattle at 09:20, Mount Rainier | ![Rio de Janeiro at dusk](docs/gallery/rio-dusk.png) Rio de Janeiro at dusk, Sugarloaf |
-| ![Cape Town with the chat open](docs/gallery/cape-town-chat.png) Cape Town at 13:00, with a chat open as a side panel | ![Zermatt at night with the chat in full screen](docs/gallery/zermatt-night-full.png) Zermatt at night, with the chat in full screen |
-| ![Moshi in the morning](docs/gallery/moshi-morning.png) Moshi at 07:10, Kilimanjaro | ![Uluru in the late afternoon](docs/gallery/uluru-day.png) Uluru in the late afternoon |
-| ![London in the afternoon](docs/gallery/london-afternoon.png) London has no mountain in the catalog, so it gets made-up hills | ![Reykjavik at night](docs/gallery/reykjavik-night.png) Reykjavik at night, with a made-up range in the far north style |
+| ![Seattle in the morning](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/seattle-morning.png) Seattle at 09:20, Mount Rainier | ![Rio de Janeiro at dusk](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/rio-dusk.png) Rio de Janeiro at dusk, Sugarloaf |
+| ![Cape Town with the chat open](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/cape-town-chat.png) Cape Town at 13:00, with a chat open as a side panel | ![Zermatt at night with the chat in full screen](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/zermatt-night-full.png) Zermatt at night, with the chat in full screen |
+| ![Moshi in the morning](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/moshi-morning.png) Moshi at 07:10, Kilimanjaro | ![Uluru in the late afternoon](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/uluru-day.png) Uluru in the late afternoon |
+| ![London in the afternoon](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/london-afternoon.png) London has no mountain in the catalog, so it gets made-up hills | ![Reykjavik at night](https://raw.githubusercontent.com/brend0nc/session-board/main/docs/gallery/reykjavik-night.png) Reykjavik at night, with a made-up range in the far north style |
 
 Every picture comes from an address like `?demo=research&view=fuji&at=06:10&theme=night`, so you can make your own.
 
