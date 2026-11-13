@@ -92,9 +92,11 @@ async function main(argv: string[]): Promise<number> {
   return 0;
 }
 
+// The process ends by itself when the work is done. A forced exit can cut the output
+// when it goes to a pipe, and the relay reads its messages from that output.
 main(process.argv.slice(2)).then((code) => {
-  if (code >= 0) process.exit(code);
+  if (code >= 0) process.exitCode = code;
 }).catch((err: Error) => {
   console.error(err.message);
-  process.exit(1);
+  process.exitCode = 1;
 });

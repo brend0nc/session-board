@@ -140,7 +140,7 @@ export function serve(): void {
   server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.code === "EADDRINUSE") console.log("The board already runs. Open http://127.0.0.1:" + config.port);
     else console.error(err.message);
-    process.exit(err.code === "EADDRINUSE" ? 0 : 1);
+    process.exitCode = err.code === "EADDRINUSE" ? 0 : 1;
   });
   server.listen(config.port, "127.0.0.1", () => {
     console.log(config.title + ": http://127.0.0.1:" + config.port + "  (project: " + (config.project || "all") + ")");
