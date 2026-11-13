@@ -23,7 +23,7 @@ It also looks like a small pixel game, with a view of a mountain near you. I loo
 You need Node 20 or later, and the Claude desktop app.
 
 ```shell
-npm install -g session-board
+npm install -g @bungeegum-senpai/session-board
 ```
 
 If you want to change the code, clone the repository instead:
