@@ -1,0 +1,12 @@
+{
+  "title": "Sessions",
+  "project": "",
+  "name": "Your name",
+  "city": "",
+  "time_zone": "",
+  "lat": null,
+  "lon": null,
+  "skyline": "auto",
+  "port": 4748,
+  "days": 10
+}

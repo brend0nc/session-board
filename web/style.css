@@ -1,0 +1,149 @@
+/* Game look: pixel frames (no radius), Pixelify Sans for labels, Hanken Grotesk for reading text. */
+:root{--font:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;--px:"Pixelify Sans","Hanken Grotesk",sans-serif;
+  --bg:#f5f5f5;--surface:#fff;--ink:#171717;--ink-body:#2b2b2b;--ink-soft:#5c5c5c;--rule:#dcdcdc;--line:#1f1f1f;
+  --accent:#0b7366;--on-accent:#fff;--amber:#b8730f;--bad:#a23420;--peek:600px;color-scheme:light}
+:root[data-theme="night"]{--bg:#121414;--surface:#1a1d1d;--ink:#ececec;--ink-body:#d4d6d6;--ink-soft:#a0a4a4;--rule:#2a2f2f;--line:#727979;
+  --accent:#17cfb9;--on-accent:#04211d;--amber:#f0b44c;--bad:#ff8f78;color-scheme:dark}
+/* text on the view: light with a pixel shadow, dark by day */
+:root{--hud:#fff;--hud-shadow:2px 2px 0 rgba(0,0,0,.55);--hud-drop:drop-shadow(2px 2px 0 rgba(0,0,0,.55))}
+:root[data-sky="day"]{--hud:#0d2236;--hud-shadow:none;--hud-drop:none}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink-body);font-family:var(--font);line-height:1.5}
+a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+button.link{font:inherit;color:var(--ink-soft);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+button.link:hover{color:var(--accent);text-decoration-color:currentColor}
+button:focus-visible,a:focus-visible,.item:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+kbd{font-family:var(--px);font-size:.9rem;color:var(--ink-soft);padding:0 5px;box-shadow:0 -2px 0 var(--rule),0 2px 0 var(--rule),-2px 0 0 var(--rule),2px 0 0 var(--rule);margin:0 4px}
+h1,h2{color:var(--ink);text-wrap:balance}
+/* a pixel frame: four edge bars, so the corners stay notched */
+.px{background:var(--surface);box-shadow:0 -2px 0 var(--line),0 2px 0 var(--line),-2px 0 0 var(--line),2px 0 0 var(--line)}
+/* wallpaper: a few small pixel marks, one step away from the page colour. It stays still when the page scrolls. */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--wall) 0 0/320px 320px;image-rendering:pixelated}
+#wrap{transition:margin-right .2s ease-out}
+body.peek #wrap{margin-right:min(var(--peek),100vw)}
+
+/* masthead: the pixel view sits behind the status line and the title */
+#mast{position:relative;height:256px;border-bottom:2px solid var(--line);overflow:hidden;color:var(--hud)}
+#scene{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;background:#0a0f24}
+.statusbar{position:relative;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 32px 0;font-family:var(--px);font-size:1rem;text-shadow:var(--hud-shadow)}
+#city:not(:empty){margin-right:6px}
+.statusbar .right{display:flex;gap:16px;align-items:center}
+#relay{display:inline-flex;align-items:center;gap:8px}
+#relay svg{filter:var(--hud-drop)}
+#relay.off{color:#ff9d8a}
+:root[data-sky="day"] #relay.off{color:#a23420}
+.titlerow{position:relative;display:flex;align-items:center;gap:14px;margin:10px 32px 0}
+h1{font-family:var(--px);font-size:2.6rem;font-weight:600;line-height:1.05;margin:0;color:inherit;text-shadow:var(--hud-shadow)}
+#rename .ib{opacity:0}
+.titlerow:hover #rename .ib,#rename .ib:focus-visible{opacity:1}
+#titleedit{font-family:var(--px);font-size:2.2rem;font-weight:600;line-height:1.05;width:min(560px,70vw);padding:2px 8px;border:0;outline:0;color:var(--ink)}
+#project{position:relative;margin:4px 32px 0;font-family:var(--px);font-size:1rem;text-shadow:var(--hud-shadow)}
+
+.sprite{position:relative;display:inline-block;flex:none;line-height:0}
+.sprite canvas{image-rendering:pixelated;display:block}
+.sprite .mark{position:absolute;right:-7px;top:-9px;font-family:var(--px);font-size:1.1rem;font-weight:700;line-height:1;color:var(--amber)}
+
+#now{max-width:820px;padding:22px 32px 0;min-height:150px}
+#now .who{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--px);font-size:1.05rem;color:var(--ink)}
+#now .who span.since{font-family:var(--font);font-size:.85rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+#now .ask{font-size:1.6rem;font-weight:500;line-height:1.25;margin:8px 0 0}
+#now .ctx{margin:10px 0 0;font-size:.95rem;color:var(--ink-soft);max-width:68ch;text-wrap:pretty;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:18px 2px 0;font-size:.9rem}
+.acts button.pick{font-family:var(--px);font-size:1.05rem;padding:6px 14px;border:0;color:var(--ink);cursor:pointer;--line:var(--ink-soft)}
+.acts button.pick:hover{--line:var(--accent);color:var(--accent)}
+.acts .k{font-size:.9rem;color:var(--ink-soft);margin-right:8px}
+
+/* icon buttons: pixel icons in a pixel frame */
+.ib{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:30px;min-width:30px;padding:0 6px;border:0;color:var(--ink);cursor:pointer;font-family:var(--px);font-size:1rem;text-decoration:none;text-shadow:none;--line:var(--ink-soft)}
+.ib.wide{padding:0 12px 0 10px}
+.ib:hover{--line:var(--accent);color:var(--accent)}
+.ib svg{display:block;flex:none}
+
+main{padding:30px 34px 60px}
+#board{display:flex;gap:30px;align-items:stretch;overflow-x:auto;padding:2px 2px 20px}
+.col{flex:1 1 0;min-width:230px;min-height:140px}
+.col.waits{flex:1.3 1 0}
+.col h2{font-family:var(--px);font-size:1.1rem;font-weight:500;margin:0 0 14px;padding-bottom:6px;border-bottom:2px solid var(--rule)}
+.col.waits h2{border-bottom-color:var(--line)}
+.col.over h2{border-bottom-color:var(--accent);color:var(--accent)}
+.col h2 span{color:var(--ink-soft);margin-left:8px}
+.item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;cursor:pointer}
+.item.drag{opacity:.4}
+.t{font-weight:500;font-size:.95rem;line-height:1.35;color:var(--ink);text-wrap:balance}
+.q,.c{margin-top:5px;font-size:.88rem;line-height:1.4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.q{-webkit-line-clamp:3;color:var(--ink-body)}
+.c{-webkit-line-clamp:2;color:var(--ink-soft)}
+.m{margin-top:6px;font-size:.8rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.m b{font-weight:500;color:var(--accent)}
+.m b.bad{color:var(--bad)}
+.col.waits .item{padding:12px 14px;margin:2px 2px 14px;--line:var(--rule)}
+.col.waits .item .t{font-weight:600}
+.col.waits .item:hover{--line:var(--ink-soft)}
+.col.waits .item.cur{--line:var(--ink)}
+.col.waits .item.sel{--line:var(--accent)}
+.col:not(.waits) .item{padding:11px 0;border-bottom:1px solid var(--rule)}
+.col:not(.waits) .item:hover .t,.col:not(.waits) .item.sel .t{color:var(--accent)}
+.col.done .t{color:var(--ink-soft);font-weight:400}
+.col.done .sprite{filter:grayscale(1);opacity:.45}
+.none{color:var(--ink-soft);font-size:.88rem}
+#keys{margin:8px 0 0;color:var(--ink-soft);font-size:.85rem}
+
+#panel{position:fixed;top:0;right:0;bottom:0;width:min(var(--peek),100vw);background:var(--bg) var(--wall) 0 0/320px 320px;image-rendering:pixelated;border-left:2px solid var(--line);display:flex;flex-direction:column;transform:translateX(101%);transition:transform .2s ease-out;--gut:24px}
+body.peek #panel{transform:none}
+body.full #panel{width:100vw;border-left:0;--gut:max(24px,calc((100vw - 880px)/2))}
+/* the chat header is the same view, with the session's creature on the shore */
+#phead{position:relative;flex:none;height:104px;overflow:hidden;border-bottom:2px solid var(--line);color:var(--hud)}
+#pscene{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;background:#0a0f24}
+.ptext{position:relative;padding:12px calc(var(--gut) + 180px) 0 var(--gut)}
+.ptools{position:absolute;top:14px;right:var(--gut);display:flex;gap:12px}
+#ptitle{font-family:var(--px);font-size:1.2rem;font-weight:500;line-height:1.25;text-shadow:var(--hud-shadow);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pmeta{margin-top:3px;font-family:var(--px);font-size:.95rem;text-shadow:var(--hud-shadow)}
+#thread{flex:1;overflow-y:auto;padding:4px var(--gut) 18px;scrollbar-width:thin;scrollbar-color:var(--ink-soft) transparent}
+.msg{margin:20px 0}
+.msg.fresh{animation:fade .3s ease-out both}
+@keyframes fade{from{opacity:0}}
+.who{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-soft);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.msg.you .who{justify-content:flex-end}
+.who b{font-family:var(--px);font-size:.95rem;font-weight:500;color:var(--ink)}
+.msg.you .who b{color:var(--accent)}
+.msg.you{display:flex;flex-direction:column;align-items:flex-end}
+.msg.you .body{padding:9px 13px;max-width:88%;margin:2px;--line:var(--rule)}
+.msg.peer .body{color:var(--ink-soft)}
+/* the reply that waits for an answer is the open dialogue box */
+.msg.ask{padding:14px 16px;margin:22px 2px;--line:var(--accent)}
+.choices{list-style:none;padding:0;margin:.7em 2px .2em}
+.choices li{display:flex;gap:10px;align-items:baseline;padding:8px 12px;margin-bottom:12px;cursor:pointer;--line:var(--ink-soft)}
+.choices li:hover,.choices li:focus-visible{--line:var(--accent);color:var(--accent)}
+.choices .n{font-family:var(--px);font-size:1rem;color:var(--ink-soft)}
+button.sess{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.step{font-size:.85rem;color:var(--ink-soft);padding:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.typing{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-family:var(--px);font-size:.95rem;margin:14px 0}
+.body{font-size:.95rem;overflow-wrap:anywhere}
+.body p{margin:0 0 .6em;text-wrap:pretty}
+.body p:last-child{margin-bottom:0}
+.body h4{font-size:1rem;font-weight:600;margin:.9em 0 .3em;color:var(--ink)}
+.body ul,.body ol{margin:.2em 0 .6em;padding-left:1.3em}
+.body hr{border:0;border-top:1px solid var(--rule);margin:.9em 0}
+.body blockquote{margin:.4em 0;padding-left:12px;color:var(--ink-soft)}
+.body table{display:block;overflow-x:auto;border-collapse:collapse;font-size:.85rem;margin:.4em 0 .7em}
+.body th,.body td{border:1px solid var(--rule);padding:4px 8px;text-align:left;vertical-align:top}
+.body th{font-weight:600}
+.body code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.9em;background:var(--surface);border:1px solid var(--rule);padding:0 4px}
+.body pre{background:var(--surface);border:1px solid var(--rule);padding:10px;overflow-x:auto;font-size:.82rem;margin:.4em 0 .7em}
+.body pre code{border:0;padding:0;background:none;font-size:1em}
+#composer{border-top:2px solid var(--rule);padding:14px var(--gut) 22px}
+.opts{display:flex;flex-wrap:wrap;gap:12px;margin:2px 2px 12px}
+.opts button{font-family:var(--px);font-size:1rem;padding:5px 12px;border:0;color:var(--ink);cursor:pointer;--line:var(--rule)}
+.opts button:hover{--line:var(--ink-soft)}
+.opts button[aria-pressed="true"]{--line:var(--accent);color:var(--accent)}
+.sendrow{display:flex;gap:10px;align-items:flex-end;padding:6px 8px 8px 12px;margin:2px;--line:var(--rule)}
+.sendrow:focus-within{--line:var(--accent)}
+.sendrow::before{content:">";align-self:center;font-family:var(--px);font-size:1.15rem;color:var(--accent)}
+textarea{flex:1;min-width:0;resize:none;border:0;outline:0;background:none;color:var(--ink);font:inherit;font-size:.95rem;line-height:1.4;padding:7px 0;height:38px;max-height:180px}
+/* the one raised button: a 2px lip that goes down when pressed */
+button.send{font-family:var(--px);font-size:1.05rem;font-weight:500;height:34px;padding:0 16px;border:0;background:var(--accent);color:var(--on-accent);cursor:pointer;box-shadow:0 2px 0 var(--line)}
+button.send:active{transform:translateY(2px);box-shadow:none}
+.err{color:var(--bad);font-size:.85rem;margin-top:8px}
+@media (max-width:1100px){body.peek #wrap{margin-right:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400..700&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="wrap">
+<header id="mast">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="statusbar">
+    <span><span id="city"></span><time id="clock"></time></span>
+    <span class="right"><span id="locate"></span><span id="relay" role="img"></span><button class="ib px" id="theme" type="button"></button></span>
+  </div>
+  <div class="titlerow"><h1 id="title"></h1><span id="rename"></span></div>
+  <p id="project"></p>
+</header>
+<section id="now" aria-label="Current question"></section>
+<main>
+  <div id="board"></div>
+  <p id="keys"><kbd>1</kbd><kbd>2</kbd> pick an answer · <kbd>N</kbd> next question · <kbd>C</kbd> open the chat · <kbd>F</kbd> full screen · <kbd>Esc</kbd> close it · drag a session to Done <span id="flash"></span></p>
+</main>
+</div>
+<aside id="panel" aria-label="Session chat">
+  <div id="phead"><canvas id="pscene" aria-hidden="true"></canvas><div class="ptext"><div id="ptitle"></div><div id="pmeta"></div></div><div class="ptools" id="ptools"></div></div>
+  <div id="thread"></div>
+  <div id="composer"></div>
+</aside>
+<script>window.BOOT = __BOOT__;</script>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

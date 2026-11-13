@@ -1,0 +1,28 @@
+{
+  "name": "session-board",
+  "version": "0.1.0",
+  "description": "One local page for your Claude Code desktop sessions: who waits for you, who works, and a chat for each. Pixel-game look.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "session-board": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "config.example.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc -p web/tsconfig.json && node scripts/copy-web.mjs",
+    "start": "node dist/cli.js",
+    "prepare": "npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.0"
+  }
+}
