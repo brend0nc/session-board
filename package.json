@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "description": "One local page for your Claude Code desktop sessions: who waits for you, who works, and a chat for each. Pixel-game look.",
   "license": "MIT",
+  "author": "brend0nc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brend0nc/session-board.git"
+  },
+  "homepage": "https://github.com/brend0nc/session-board#readme",
+  "bugs": {
+    "url": "https://github.com/brend0nc/session-board/issues"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "dashboard",
+    "sessions",
+    "pixel-art"
+  ],
   "type": "module",
   "bin": {
     "session-board": "dist/cli.js"

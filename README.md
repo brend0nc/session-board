@@ -23,13 +23,19 @@ It also looks like a small pixel game, with a view of a mountain near you. I loo
 You need Node 20 or later, and the Claude desktop app.
 
 ```shell
+npm install -g session-board
+```
+
+If you want to change the code, clone the repository instead:
+
+```shell
 git clone https://github.com/brend0nc/session-board
 cd session-board
 npm install
 npm link
 ```
 
-`npm install` also builds the app, and `npm link` puts the `session-board` command on your path.
+Here `npm install` also builds the app, and `npm link` puts the `session-board` command on your path.
 
 ### Use
 
