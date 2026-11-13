@@ -4,9 +4,12 @@
   --accent:#0b7366;--on-accent:#fff;--amber:#b8730f;--bad:#a23420;--peek:600px;color-scheme:light}
 :root[data-theme="night"]{--bg:#121414;--surface:#1a1d1d;--ink:#ececec;--ink-body:#d4d6d6;--ink-soft:#a0a4a4;--rule:#2a2f2f;--line:#727979;
   --accent:#17cfb9;--on-accent:#04211d;--amber:#f0b44c;--bad:#ff8f78;color-scheme:dark}
-/* text on the view: light with a pixel shadow, dark by day */
-:root{--hud:#fff;--hud-shadow:2px 2px 0 rgba(0,0,0,.55);--hud-drop:drop-shadow(2px 2px 0 rgba(0,0,0,.55))}
-:root[data-sky="day"]{--hud:#0d2236;--hud-shadow:none;--hud-drop:none}
+/* text on the view: light, with a dark pixel outline on all sides and a shadow below.
+   So it reads on sky, rock, trees and water, at each time of day. */
+:root{--hud:#fff;--edge:#0a1020;
+  --hud-shadow:1px 0 0 var(--edge),-1px 0 0 var(--edge),0 1px 0 var(--edge),0 -1px 0 var(--edge),1px 1px 0 var(--edge),-1px -1px 0 var(--edge),1px -1px 0 var(--edge),-1px 1px 0 var(--edge),2px 2px 0 var(--edge);
+  --hud-shadow-big:2px 0 0 var(--edge),-2px 0 0 var(--edge),0 2px 0 var(--edge),0 -2px 0 var(--edge),2px 2px 0 var(--edge),-2px -2px 0 var(--edge),2px -2px 0 var(--edge),-2px 2px 0 var(--edge),4px 4px 0 var(--edge);
+  --hud-drop:drop-shadow(1px 0 0 var(--edge)) drop-shadow(-1px 0 0 var(--edge)) drop-shadow(0 1px 0 var(--edge)) drop-shadow(0 -1px 0 var(--edge))}
 *{box-sizing:border-box}
 html{font-size:17px}
 body{margin:0;background:var(--bg);color:var(--ink-body);font-family:var(--font);line-height:1.5}
@@ -32,9 +35,8 @@ body.peek #wrap{margin-right:min(var(--peek),100vw)}
 #relay{display:inline-flex;align-items:center;gap:8px}
 #relay svg{filter:var(--hud-drop)}
 #relay.off{color:#ff9d8a}
-:root[data-sky="day"] #relay.off{color:#a23420}
 .titlerow{position:relative;display:flex;align-items:center;gap:14px;margin:10px 32px 0}
-h1{font-family:var(--px);font-size:2.6rem;font-weight:600;line-height:1.05;margin:0;color:inherit;text-shadow:var(--hud-shadow)}
+h1{font-family:var(--px);font-size:2.6rem;font-weight:600;line-height:1.05;margin:0;color:inherit;text-shadow:var(--hud-shadow-big)}
 #rename .ib{opacity:0}
 .titlerow:hover #rename .ib,#rename .ib:focus-visible{opacity:1}
 #titleedit{font-family:var(--px);font-size:2.2rem;font-weight:600;line-height:1.05;width:min(560px,70vw);padding:2px 8px;border:0;outline:0;color:var(--ink)}
