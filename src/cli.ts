@@ -44,7 +44,9 @@ async function init(useDefaults: boolean): Promise<void> {
       (await rl.question(question + (fallback ? " [" + fallback + "]" : "") + ": ")).trim() || fallback;
     answers.title = await ask("Name of your board", answers.title || DEFAULTS.title);
     answers.name = await ask("Your name, shown to a session with each message", answers.name);
-    answers.project = await ask("Show one project only? Give part of its folder name, or leave empty for all", answers.project);
+    // An empty answer must clear the project, so this question has no fallback.
+    const now = answers.project ? " (now: " + answers.project + ")" : "";
+    answers.project = await ask("Show one project only? Give part of its folder name, or leave empty for all" + now, "");
     startRelay = !/^n/i.test(await ask("Open a Claude session for the relay now? (y/n)", "y"));
     rl.close();
   }
